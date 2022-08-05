@@ -1,0 +1,132 @@
+.div-navigation-bar{
+    padding: 0px 20px;
+    height: 72px;
+    width: 98%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+.div-navigation-bar::before{
+    content: "";
+    background: linear-gradient(0deg, #E3E3E3, #F7F7F7, #FEFEFE);
+    position: absolute;
+    height: 73px;
+    width: 100%;
+    z-index: -1;
+    filter: blur(10px);
+}
+.navigation-bar-item{
+    margin: 0px 8px;
+    padding: 8px 0px;
+}
+.cart-button{
+    background-color: white;
+    border: none;
+    height: 48px;
+    width: 48px;
+}
+.search-button{
+    background-color: white;
+    border: none;
+    height: 48px;
+    width: 48px;
+}
+
+/* pc */
+@media only screen and (min-width: 780px) {
+    .bar-button{
+        display: none;
+    }
+    .button-categories{
+        border: none;
+        background-color: white;
+    }
+    .button-search{
+        border: none;
+        background-color: white;
+    }
+    .btn_language{
+        background-color: white;
+        border: 1px solid black;
+        height: 40px;
+        width: 40px;
+    }
+    .sign-up{
+        border: none;
+        color: white;
+        background-color: black;
+        font-weight: 900;
+        font-size: 14px;
+    }
+    .log-in{
+        border: 1px solid black;
+        background-color: white;
+    }
+    .button{
+        border: 1px solid black;
+        height: 40px;
+        width: 80px;
+    }
+    .navigation-bar-input{
+        display: inline;
+        padding: auto;
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        max-width: 1117px;
+    }
+    .navigation-bar-input-text{
+        height: 46px;
+        border-radius: 25px;
+        width: 100%;
+    }
+    .search-button{
+        display: none;
+    }
+}
+
+/* phone */
+@media only screen and (max-width: 780px) {
+    .bar-button{
+        background-color: white;
+        border: none;
+        height: 48px;
+        width: 48px;
+    }
+    .sign-up{
+        display: none;
+    }
+    .log-in{
+        display: none;
+    }
+    .navigation-bar-input{
+        display: none;
+    }
+    .btn_language{
+        display: none;
+    }
+    .udemy-icon{
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    .business{
+        display: none;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .teach{
+        display: none;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .navbar-categories{
+        display: none;
+    }
+}
+
+

@@ -5,9 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- top Navigation bar -->
+    <header class="div-navigation-bar">
+        <button class="bar-button navigation-bar-item"><i style='font-size:22px' class="fa fa-bars"></i></button>
+        
+        <a class="udemy-icon navigation-bar-item" href="/">
+            <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg"
+            alt="udemy" width="91" height="34">
+        </a>
+        <nav class="navbar-categories navigation-bar-item">
+            <button class="button-categories">
+                <span>Categories</span>
+            </button>
+        </nav>
+        <form action="/" class="navigation-bar-input navigation-bar-item">
+            <input class="navigation-bar-input-text" type="text" name="search" placeholder="  Search for anything">
+            <button class="button-search" type="submit">
+                <i class="fa fa-search" style="font-size:24px"></i>
+            </button>
+        </form>
+
+        <span class="business navigation-bar-item">Udemy Business</span>
+        <span class="teach navigation-bar-item">Teach on Udemy</span>
+        <button class="search-button navigation-bar-item"><i class="fa fa-search" style="font-size:24px"></i></button>
+        <button class="cart-button navigation-bar-item"><i class="material-icons">shopping_cart</i></button>
+
+        <button class="button log-in navigation-bar-item">Log in</button>
+        <button class="button sign-up navigation-bar-item">Sign up</button>
+        <button class="btn_language navigation-bar-item"><i class="material-icons">language</i></button>
+    </header>
 </body>
 </html>
