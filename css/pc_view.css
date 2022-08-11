@@ -1,0 +1,84 @@
+/* when pc view */
+@media only screen and (min-width: 780px) {
+    .bar-button {
+        display: none;
+    }
+    .button-categories {
+        border: none;
+        background-color: white;
+    }
+    .button-search {
+        border: none;
+        background-color: white;
+    }
+    .btn_language {
+        background-color: white;
+        border: 1px solid black;
+        height: 40px;
+        width: 40px;
+    }
+    .sign-up {
+        border: none;
+        color: white;
+        background-color: black;
+        font-weight: 900;
+        font-size: 14px;
+    }
+    .log-in {
+        border: 1px solid black;
+        background-color: white;
+    }
+    .button {
+        border: 1px solid black;
+        height: 40px;
+        width: 80px;
+    }
+    .navigation-bar-input {
+        display: inline;
+        padding: auto;
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        max-width: 1117px;
+    }
+    .navigation-bar-input-text {
+        height: 46px;
+        border-radius: 25px;
+        width: 100%;
+    }
+    .search-button {
+        display: none;
+    }
+    .home-page-banner {
+        z-index: -2;
+    }
+    .content-box-banner {
+        background-color: white;
+        width: 440px;
+        height: 250px;
+        margin: .8% 0% 0% .8%;
+        padding-left: 24px;
+        position: absolute;
+    }
+    .content-box-banner::before {
+        content: "";
+        background: linear-gradient(0deg, #dedede, #dedede, #dedede);
+        position: absolute;
+        width: 450px;
+        height: 260px;
+        z-index: -1;
+        filter: blur(10px);
+    }
+    .banner {
+        margin: auto;
+        will-change: 100%;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+    }
+    .courses-grid {
+        display: flex;
+        justify-content: stretch;
+        flex-wrap: wrap;
+    }
+}

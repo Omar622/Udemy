@@ -1,0 +1,37 @@
+/* top navigation bar and its items design */
+
+.div-navigation-bar {
+    padding: 0px 20px;
+    height: 72px;
+    width: 98%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+.div-navigation-bar::before {
+    content: "";
+    background: linear-gradient(0deg, #e3e3e3, #f7f7f7, #fefefe);
+    position: absolute;
+    height: 73px;
+    width: 100%;
+    z-index: -1;
+    filter: blur(10px);
+}
+.navigation-bar-item {
+    margin: 0px 8px;
+    padding: 8px 0px;
+}
+
+.cart-button {
+    background-color: white;
+    border: none;
+    height: 48px;
+    width: 48px;
+}
+.search-button {
+    background-color: white;
+    border: none;
+    height: 48px;
+    width: 48px;
+}
