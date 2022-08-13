@@ -20,93 +20,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- javascript -->
-    <script>
-        // build star rating design
-        const build_stars = (rating) => {
-            stars = [];
-            let rem = 5;
-            while(parseFloat(rating, 10) >= .7){
-                let newIcon = document.createElement("span")
-                newIcon.innerHTML = '<i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>'
-                stars.push(newIcon)
-                rating -= 1
-                --rem;
-            }
-            if(parseFloat(rating, 10) >= 0.3){
-                let newIcon = document.createElement("span")
-                newIcon.innerHTML = '<i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>'
-                stars.push(newIcon)
-                --rem;
-            }
-            while(rem > 0){
-                let newIcon = document.createElement("span")
-                newIcon.innerHTML = '<i class="fa fa-star-o" style="font-size:12px;color:#ebb252"></i>'
-                stars.push(newIcon)
-                --rem;
-            }
-            return stars
-        }
-        // load specialization data
-        const loadData = async (branch) => {
-            let response = await fetch("http://localhost:3000/" + branch)
-            let json = await response.json()
-            return json
-        }
-
-        loadData("python").then((res) => {      
-            let course_gird = document.querySelector('.courses-grid')      
-            for(item of res){
-                let newImg = document.createElement("img")
-                newImg.src = item["image"]
-                newImg.alt = "python"
-                newImg.height = "150"
-                newImg.width = "260"
-
-                let CourseName = document.createElement("h3");
-                CourseName.style.cssText = "margin: 5px"
-                let title = item["title"]
-                if(title.length > 45) title = title.substring(0, 44) + "..."
-                CourseName.append(title)
-
-
-                let instructorName = document.createElement("p")
-                instructorName.classList.add("coures-grid-item-description")
-                instructorName.style.cssText = "color: #876f89;"
-                instructorName.append(item["author"])
-
-                let rating = document.createElement("p")
-                rating.style.cssText = "display: inline; font-size: 12px; color: #ce810e;"
-                rating.append(item["rating"] + " ")
-
-                let retedby = document.createElement("p")
-                retedby.style.cssText = "display: inline; font-size: 12px; color: #738abb;"
-                retedby.append("(" + item["people"] + ")")
-
-                let price = document.createElement("h3");
-                price.style.cssText = "margin: 5px"
-                price.append("E€ " + item["price"])
-
-                stars = build_stars(parseFloat(item["rating"]))
-
-                let newHeader = document.createElement("header");
-                newHeader.style.cssText = "padding-left: 12px;"
-                newHeader.append(CourseName)
-                newHeader.appendChild(instructorName)
-                newHeader.appendChild(rating)
-                for(star of stars) newHeader.appendChild(star)
-                newHeader.appendChild(retedby)
-                newHeader.appendChild(price)
-
-                let newCart = document.createElement("section")
-                newCart.classList.add("courses-grid-item")
-                newCart.appendChild(newImg)
-                newCart.appendChild(newHeader)
-                
-                course_gird.appendChild(newCart)
-            }
-        })
-    </script>
     <!-- top Navigation bar -->
     <header class="div-nav-bar">
         <!-- burger button (displayed in phone view only) -->
@@ -128,9 +41,10 @@
         </nav>
 
         <!-- search field (displayed in pc view only)-->
-        <form action="/" class="nav-bar-input nav-bar-item">
-            <input class="pc-view nav-bar-input-text" type="text" name="search" placeholder="     Search for anything">
-            <button class="pc-view transparent-button" type="submit">
+        <form class="nav-bar-input nav-bar-item" id="search-form">
+            <input class="pc-view nav-bar-input-text" id="search-input" type="text" 
+                    name="search" placeholder="Search for anything" style="padding: 0px 20px">
+            <button class="pc-view transparent-button" id="search-submit" type="submit">
                 <i class="fa fa-search" style="font-size:24px"></i>
             </button>
         </form>
@@ -196,6 +110,16 @@
                 <h1 style="font-size:35px">A broad selection of courses</h1>
                 <p style="font-size:20px">Choose form 185,000 online video with new additions published every month</p>
             </header>
+            <!-- tabs -->
+            <section class="courses-tabs">
+                <button class="transparent-button"  id = "python-cat-button" style="font-size: 20px; color: black;">Python</button>
+                <button class="transparent-button " id = "Excel-cat-button" style="font-size: 20px; color: #6a6f73;">Excel</button>
+                <button class="transparent-button " id = "Web-cat-button" style="font-size: 20px; color: #6a6f73;">Web Development</button>
+                <button class="transparent-button " id = "JavaScript-cat-button" style="font-size: 20px; color: #6a6f73;">JavaScript</button>
+                <button class="transparent-button " id = "Data-cat-button" style="font-size: 20px; color: #6a6f73;">Data Science</button>
+                <button class="transparent-button " id = "AWS-cat-button" style="font-size: 20px; color: #6a6f73;">AWS Certification</button>
+                <button class="transparent-button " id = "Drawing-cat-button" style="font-size: 20px; color: #6a6f73;">Drawing</button>
+            </section>
             <div class="courses-box">
                 <header>
                     <h3>Expand your career opportunities with Python</h3>
@@ -206,14 +130,12 @@
                     data science, and machine learning. You 'll learn how to build everything from games to 
                     sites to apps. Choose from a range of courses that will appeal to...
                 </p>
-                <button class="lg-white-black-button">
-                    Explore Python
-                </button>
-                <section class="courses-grid">
-                    
-                </section>
+                <button class="lg-white-black-button">Explore Python</button>
+                <section class="courses-grid"></section>
             </div>
         </section>
     </main>
+    <!-- javascript -->
+    <script src="myScript.js"></script>
 </body>
 </html>

@@ -1,9 +1,12 @@
 /* main css file */
-
 .main-content {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.courses-tabs {
+    margin: 12px 0px;
 }
 
 .courses-content {
