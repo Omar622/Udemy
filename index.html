@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css link -->
     <link rel="stylesheet" href="css/main_css.css"/>
-
-    
     <link rel="stylesheet" href="css/navbar.css"/>
     <link rel="stylesheet" href="css/button.css"/>
     <link rel="stylesheet" href="css/search_navbar.css"/>
@@ -22,6 +20,93 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- javascript -->
+    <script>
+        // build star rating design
+        const build_stars = (rating) => {
+            stars = [];
+            let rem = 5;
+            while(parseFloat(rating, 10) >= .7){
+                let newIcon = document.createElement("span")
+                newIcon.innerHTML = '<i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>'
+                stars.push(newIcon)
+                rating -= 1
+                --rem;
+            }
+            if(parseFloat(rating, 10) >= 0.3){
+                let newIcon = document.createElement("span")
+                newIcon.innerHTML = '<i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>'
+                stars.push(newIcon)
+                --rem;
+            }
+            while(rem > 0){
+                let newIcon = document.createElement("span")
+                newIcon.innerHTML = '<i class="fa fa-star-o" style="font-size:12px;color:#ebb252"></i>'
+                stars.push(newIcon)
+                --rem;
+            }
+            return stars
+        }
+        // load specialization data
+        const loadData = async (branch) => {
+            let response = await fetch("http://localhost:3000/" + branch)
+            let json = await response.json()
+            return json
+        }
+
+        loadData("python").then((res) => {      
+            let course_gird = document.querySelector('.courses-grid')      
+            for(item of res){
+                let newImg = document.createElement("img")
+                newImg.src = item["image"]
+                newImg.alt = "python"
+                newImg.height = "150"
+                newImg.width = "260"
+
+                let CourseName = document.createElement("h3");
+                CourseName.style.cssText = "margin: 5px"
+                let title = item["title"]
+                if(title.length > 45) title = title.substring(0, 44) + "..."
+                CourseName.append(title)
+
+
+                let instructorName = document.createElement("p")
+                instructorName.classList.add("coures-grid-item-description")
+                instructorName.style.cssText = "color: #876f89;"
+                instructorName.append(item["author"])
+
+                let rating = document.createElement("p")
+                rating.style.cssText = "display: inline; font-size: 12px; color: #ce810e;"
+                rating.append(item["rating"] + " ")
+
+                let retedby = document.createElement("p")
+                retedby.style.cssText = "display: inline; font-size: 12px; color: #738abb;"
+                retedby.append("(" + item["people"] + ")")
+
+                let price = document.createElement("h3");
+                price.style.cssText = "margin: 5px"
+                price.append("E€ " + item["price"])
+
+                stars = build_stars(parseFloat(item["rating"]))
+
+                let newHeader = document.createElement("header");
+                newHeader.style.cssText = "padding-left: 12px;"
+                newHeader.append(CourseName)
+                newHeader.appendChild(instructorName)
+                newHeader.appendChild(rating)
+                for(star of stars) newHeader.appendChild(star)
+                newHeader.appendChild(retedby)
+                newHeader.appendChild(price)
+
+                let newCart = document.createElement("section")
+                newCart.classList.add("courses-grid-item")
+                newCart.appendChild(newImg)
+                newCart.appendChild(newHeader)
+                
+                course_gird.appendChild(newCart)
+            }
+        })
+    </script>
     <!-- top Navigation bar -->
     <header class="div-nav-bar">
         <!-- burger button (displayed in phone view only) -->
@@ -125,92 +210,7 @@
                     Explore Python
                 </button>
                 <section class="courses-grid">
-                    <!-- course1 -->
-                    <article class="courses-grid-item">
-                        <img src="https://img-c.udemycdn.com/course/240x135/394676_ce3d_5.jpg"
-                        alt="pyton" height="150px" width="260px">
-                        <header style="padding-left: 12px;">
-                            <h3 style="margin: 5px">Learn Python: The Complete Python Programming Course</h3>
-                            <p class="coures-grid-item-description" style="color: #876f89;">Avninash jain, the Codex</p>
-                            <p style="display: inline; font-size: 12px; color: #ce810e;">4.4</p>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252;"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>
-                            <p style="display: inline; font-size: 12px; color: #738abb;">(2,916)</p>
-                            <h3 style="margin: 5px">E€ 679.99</h3>
-                        </header>
-                    </article>
-                    <!-- course2 -->
-                    <article class="courses-grid-item">
-                        <img src="https://img-c.udemycdn.com/course/240x135/396876_cc92_7.jpg"
-                        alt="python for data analysis" height="150px" width="260px">
-                        <header style="padding-left: 12px;">
-                            <h3 style="margin: 5px">Learn Python: The Complete Python Programming Course</h3>
-                            <p class="coures-grid-item-description" style="color: #876f89;">Jose Portilla</p>
-                            <p style="display: inline; font-size: 12px; color: #ce810e;">4.4</p>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252;"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>
-                            <p style="display: inline; font-size: 12px; color: #738abb;">(17,984)</p>
-                            <h3 style="margin: 5px">E€ 1,599.99</h3>
-                        </header>
-                    </article>
-                    <!-- course3 -->
-                    <article class="courses-grid-item">
-                        <img src="https://img-c.udemycdn.com/course/240x135/405878_e5a0_3.jpg"
-                        alt="python for beginners" height="150px" width="260px">
-                        <header style="padding-left: 12px;">
-                            <h3 style="margin: 5px">Python for Beginners - Learn Programming from scratch</h3>
-                            <p class="coures-grid-item-description" style="color: #876f89;">Edwin Diaz, Coding Faculty Solutions</p>
-                            <p style="display: inline; font-size: 12px; color: #ce810e;">4.4</p>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252;"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>
-                            <p style="display: inline; font-size: 12px; color: #738abb;">(1,766)</p>
-                            <h3 style="margin: 5px">E€ 679.99</h3>
-                        </header>
-                    </article>
-                    <!-- course4 -->
-                    <article class="courses-grid-item">
-                        <img src="	https://img-c.udemycdn.com/course/240x135/426570_1b91_3.jpg"
-                        alt="python for beginners" height="150px" width="260px">
-                        <header style="padding-left: 12px;">
-                            <h3 style="margin: 5px">Learn Python: Python for Beginners</h3>
-                            <p class="coures-grid-item-description" style="color: #876f89;">Abrar Hussain</p>
-                            <p style="display: inline; font-size: 12px; color: #ce810e;">4.3</p>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252;"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>
-                            <p style="display: inline; font-size: 12px; color: #738abb;">(2,767)</p>
-                            <h3 style="margin: 5px">E€ 319.99</h3>
-                        </header>
-                    </article>
-                    <!-- course5 -->
-                    <article class="courses-grid-item">
-                        <img src="https://img-c.udemycdn.com/course/240x135/449532_2aa9_7.jpg"
-                        alt="python and oop" height="150px" width="260px">
-                        <header style="padding-left: 12px;">
-                            <!-- Python Beyond the Basics - Object-Oriented Programming -->
-                            <h3 style="margin: 5px">Python Beyond the Basics - Object-Oriented...</h3> 
-                            <p class="coures-grid-item-description" style="color: #876f89;">Infinite Skills</p>
-                            <p style="display: inline; font-size: 12px; color: #ce810e;">4.4</p>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252;"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star" style="font-size:12px;color:#ebb252"></i>
-                            <i class="fa fa-star-half-empty" style="font-size:12px;color:#ebb252"></i>
-                            <p style="display: inline; font-size: 12px; color: #738abb;">(2,929)</p>
-                            <h3 style="margin: 5px">E€ 519.99</h3>
-                        </header>
-                    </article>
+                    
                 </section>
             </div>
         </section>
