@@ -1,0 +1,15 @@
+/* search in navigation bar */
+
+.nav-bar-input {
+    display: inline;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 1117px;
+}
+.nav-bar-input-text {
+    height: 46px;
+    border-radius: 25px;
+    width: 100%;
+}

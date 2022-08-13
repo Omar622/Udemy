@@ -1,0 +1,32 @@
+.sm-white-black-button {
+    background-color: white;
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+}
+.md-black-white-button {
+    border: none;
+    color: white;
+    background-color: black;
+    font-weight: 900;
+    font-size: 14px;
+    height: 40px;
+    width: 80px;
+}
+.md-white-black-button {
+    border: 1px solid black;
+    background-color: white;
+    height: 40px;
+    width: 80px;
+}
+.lg-white-black-button {
+    border: 1px solid black;
+    background-color: white;
+    height: 40px;
+    width: 150px;
+    font-weight: 800;
+}
+.transparent-button {
+    border: none;
+    background-color: white;
+}

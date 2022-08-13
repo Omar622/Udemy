@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css link -->
-    <link rel="stylesheet" href="css/between_pc_and_phone_view.css"/>
+    <link rel="stylesheet" href="css/main_css.css"/>
+
+    
     <link rel="stylesheet" href="css/navbar.css"/>
-    <link rel="stylesheet" href="css/body.css"/>
-    <link rel="stylesheet" href="css/phone_view.css"/>
-    <link rel="stylesheet" href="css/pc_view.css"/>
+    <link rel="stylesheet" href="css/button.css"/>
+    <link rel="stylesheet" href="css/search_navbar.css"/>
+    <link rel="stylesheet" href="css/home_page_banner.css"/>
 
     <!-- icons link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,35 +23,71 @@
 </head>
 <body>
     <!-- top Navigation bar -->
-    <header class="div-navigation-bar">
-        <button class="bar-button navigation-bar-item">
+    <header class="div-nav-bar">
+        <!-- burger button (displayed in phone view only) -->
+        <button class="phone-view transparent-button nav-bar-item">
             <i style='font-size:22px' class="fa fa-bars"></i>
         </button>
-        
-        <a class="udemy-icon navigation-bar-item" href="/">
+
+        <!-- udemy icon -->
+        <a class="udemy-icon nav-bar-item" href="/">
             <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg"
             alt="udemy" width="91" height="34">
         </a>
-        <nav class="navbar-categories navigation-bar-item">
-            <button class="button-categories">
+
+        <!-- categories button -->
+        <nav >
+            <button class="pc-view transparent-button nav-bar-item">
                 <span>Categories</span>
             </button>
         </nav>
-        <form action="/" class="navigation-bar-input navigation-bar-item">
-            <input class="navigation-bar-input-text" type="text" name="search" placeholder="  Search for anything">
-            <button class="button-search" type="submit">
+
+        <!-- search field (displayed in pc view only)-->
+        <form action="/" class="nav-bar-input nav-bar-item">
+            <input class="pc-view nav-bar-input-text" type="text" name="search" placeholder="     Search for anything">
+            <button class="pc-view transparent-button" type="submit">
                 <i class="fa fa-search" style="font-size:24px"></i>
             </button>
         </form>
 
-        <span class="business navigation-bar-item">Udemy Business</span>
-        <span class="teach navigation-bar-item">Teach on Udemy</span>
-        <button class="search-button navigation-bar-item"><i class="fa fa-search" style="font-size:24px"></i></button>
-        <button class="cart-button navigation-bar-item"><i class="material-icons">shopping_cart</i></button>
+        <!-- business button (displayed in small-3 mode only)-->
+        <nav>
+            <button class="sm3 transparent-button nav-bar-item">
+                <span>Udemy Business</span>
+            </button>
+        </nav>
+        
+        <!-- Teach button (displayed in small-2 mode only)-->
+        <nav>
+            <button class="sm2 transparent-button nav-bar-item">
+                <span>Teach on Udemy</span>
+            </button>
+        </nav>
 
-        <button class="button log-in navigation-bar-item">Log in</button>
-        <button class="button sign-up navigation-bar-item">Sign up</button>
-        <button class="btn_language navigation-bar-item"><i class="material-icons">language</i></button>
+        <!-- search button (displayed in phone view only) -->
+        <button class="phone-view transparent-button nav-bar-item">
+            <i class="fa fa-search" style="font-size:24px"></i>
+        </button>
+
+        <!-- shopping button (displayed in phone view only) -->
+        <button class="phone-view transparent-button nav-bar-item">
+            <i class="material-icons">shopping_cart</i>
+        </button>
+
+        <!-- log in button (displayed in pc or larger view only) -->
+        <button class="pc-view md-white-black-button nav-bar-item">
+            Log in
+        </button>
+
+        <!-- sign-up button (displayed in pc or larger view only) -->
+        <button class="pc-view md-black-white-button nav-bar-item">
+            Sign up
+        </button>
+
+        <!-- language button (displayed in pc view only) -->
+        <button class="pc-view sm-white-black-button nav-bar-item">
+            <i class="material-icons">language</i>
+        </button>
     </header>
 
     <main class="main-content">
@@ -66,6 +104,7 @@
                 alt="offer">
             </div>
         </section>
+
         <!-- courses -->
         <section class="courses-content">
             <header>
@@ -82,7 +121,7 @@
                     data science, and machine learning. You 'll learn how to build everything from games to 
                     sites to apps. Choose from a range of courses that will appeal to...
                 </p>
-                <button class="explore-python-button">
+                <button class="lg-white-black-button">
                     Explore Python
                 </button>
                 <section class="courses-grid">

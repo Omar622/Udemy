@@ -1,0 +1,68 @@
+/* main css file */
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.courses-content {
+    margin: auto;
+    width: 72%;
+    max-width: 1350px;
+}
+.courses-box {
+    border: 1px solid #ebedf0;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.courses-grid-item {
+    border: 1px solid #d1d7dc;
+    width: 260px;
+    height: 280px;
+    margin: 5px;
+}
+.coures-grid-item-description{
+    font-size:12px;
+    margin: 5px;
+}
+
+/* pc view */
+@media only screen and (min-width: 780px) {
+    .phone-view {
+        display: none;
+    }
+    .courses-grid {
+        display: flex;
+        justify-content: stretch;
+        flex-wrap: wrap;
+    }
+}
+
+/* phone view */
+@media only screen and (max-width: 780px) {
+    .pc-view {
+        display: none;
+    }
+    .udemy-icon {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* small-3 mode */
+@media only screen and (max-width: 1080px) {
+    .sm3 {
+        display: none;
+    }
+}
+
+/* small-2 mode */
+@media only screen and (max-width: 920px) {
+    .sm2 {
+        display: none;
+    }
+}
