@@ -23,13 +23,20 @@
 }
 .courses-grid-item {
     border: 1px solid #d1d7dc;
-    width: 260px;
+    width: 262px;
     height: 280px;
     margin: 5px;
 }
-.coures-grid-item-description{
+.coures-grid-item-description {
     font-size:12px;
     margin: 5px;
+}
+
+.box-of-carts {
+    padding: 0px 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 /* pc view */

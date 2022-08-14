@@ -30,3 +30,13 @@
     border: none;
     background-color: white;
 }
+.carousel-control-next, .carousel-control-prev {
+    color: #fff;
+    opacity: .5;
+    background-color: black;
+    border-radius: 50px;
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    max-width: 50px;
+}
