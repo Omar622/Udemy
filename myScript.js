@@ -32,31 +32,23 @@ const build_stars = (rating) => {
     return stars
 }
 
-// load specialization data
-const loadData = async (branch) => {
-    let response = await fetch("http://localhost:3000/" + branch)
-    let json = await response.json()
-    return json
-}
-
 // show courses cards in field 'field' and they title must match with 'match'
-const showField = (field, match) => {
-    match = match.toLowerCase()
-    document.getElementById('courses-field-header').textContent = headers[field]
-    document.getElementById('courses-field-description').textContent = descriptions[field]
-    document.getElementById('courses-field-button').textContent = "Explore " + field
+const showField = (i, match) => {
+    document.getElementById('courses-field-header').textContent = headers[fields[i]]
+    document.getElementById('courses-field-description').textContent = descriptions[fields[i]]
+    document.getElementById('courses-field-button').textContent = "Explore " + fields[i]
 
     let course_gird = document.querySelector('.courses-grid')
     course_gird.innerHTML = '' // remove all its children
-    for(item of courses[field]){
+    for(item of courses[fields[i]]){
         let tmpTitle = item["title"]
         tmpTitle = tmpTitle.toLowerCase()
-        // check first if the title match the 'match'
+        // check first if the title match the 'match' (it is guaranteed that 'match' is lower case)
         if(!tmpTitle.includes(match)) continue
         
         let newImg = document.createElement("img")
         newImg.src = item["image"]
-        newImg.alt = field
+        newImg.alt = fields[i]
         newImg.height = "150"
         newImg.width = "260"
 
@@ -111,10 +103,17 @@ const showField = (field, match) => {
     }
 }
 
+// load specialization data
+const loadData = async (branch) => {
+    let response = await fetch("http://localhost:3000/" + branch)
+    let json = await response.json()
+    return json
+}
+
 // load all data
 function loadAllData(i = 0){
     if(i === fields.length){
-        showField(fields[field_index], "");
+        showField(0, "");
         return;
     }
     loadData(fields[i]).then((res) => {
@@ -134,7 +133,7 @@ loadAllData()
 for(let i = 0; i < tabsIds.length; ++i){
     document.getElementById(tabsIds[i]).addEventListener("click", () => {
         field_index = i;
-        showField(fields[field_index], "")
+        showField(i, "")
         document.getElementById(tabsIds[i]).style.color = "black"
         for(let j = 0; j < tabsIds.length; ++j){
             if(i === j) continue
@@ -146,7 +145,8 @@ for(let i = 0; i < tabsIds.length; ++i){
 // add event to search bar
 document.getElementById('search-submit').addEventListener("click", () => {
     let text = document.getElementById('search-input').value;
-    showField(fields[field_index], text)
+    text = text.toLowerCase()
+    showField(field_index, text)
 })
 
 // stop form from reloading page
