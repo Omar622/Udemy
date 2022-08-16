@@ -9,7 +9,7 @@
     margin: 12px 0px;
 }
 
-.courses-content {
+.box-content {
     margin: auto;
     width: 72%;
     max-width: 1350px;
@@ -37,6 +37,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.image-cart {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.title-cart {
+    margin: 5px;
+    font-size: 15px;
+    font-weight: 900;
 }
 
 /* pc view */

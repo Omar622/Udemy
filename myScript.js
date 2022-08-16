@@ -1,3 +1,14 @@
+let cat_images_link = [
+    'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-marketing-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg',
+    'https://s.udemycdn.com/home/top-categories/lohp-category-music-v2.jpg'
+];
+let cat_titles = ['Design', 'Development', 'Marketing', 'IT and Software', 'Personal Development', 'Business', 'Photography', 'Music'];
 const tabsIds = ['python-cat-button', 'Excel-cat-button', 'Web-cat-button', 'JavaScript-cat-button', 'Data-cat-button', 'AWS-cat-button', 'Drawing-cat-button'];
 const fields = ['Python', 'Excel', 'Web-Development', 'JavaScript', 'Data-Science', 'AWS-Certification', 'Drawing'];
 let field_index = 0;
@@ -6,8 +17,48 @@ let titles = {};
 let headers = {};
 let descriptions = {};
 let text_in_search_bar = "";
-let state = 3, lst_state = 3;
+let state = 3, lst_state = 0;
 let number_of_carts = 4;
+
+// build categories sectoin
+function build_categories() {
+    let rows;
+    if(number_of_carts == 1){
+        rows = cat_images_link.length;
+    }else if(number_of_carts == 2){
+        rows = Math.floor((cat_images_link.length+1)/2);
+    }else if(number_of_carts == 3){
+        rows = 3;
+    }else{
+        rows = 2;
+    }
+    let cols = Math.floor((cat_images_link.length+rows-1) / rows);
+
+    let box = document.getElementById('categories-col');
+    box.innerHTML = '';
+    for(let i = 0, k = 0; i < rows; ++i){
+        if(k == cat_images_link.length) break;
+        let new_row = document.createElement('div');
+        new_row.classList.add('row');
+        for(let j = 0; j < cols; ++j){
+            if(k == cat_images_link.length) break;
+            let new_image = document.createElement('img');
+            new_image.src = cat_images_link[k];
+            new_image.alt = cat_titles[k];
+            let title = document.createElement('span');
+            title.append(cat_titles[k++]);
+            title.classList.add('title-cart');
+
+            let new_cart = document.createElement('div');
+            new_cart.classList.add('image-cart');
+            new_cart.append(new_image, title);
+            new_cart.classList.add('categories')
+            new_row.appendChild(new_cart);
+        }
+        box.appendChild(new_row);
+    }
+}
+build_categories();
 
 // build star rating design
 function buildStars(rating) {
@@ -43,7 +94,7 @@ function buildCart(i, item) {
     newImg.width = "260";
 
     let CourseName = document.createElement("h3");
-    CourseName.style.cssText = "margin: 5px; font-size: 15px;";
+    CourseName.classList.add('title-cart');
     let title = item["title"];
     if(title.length > 41) title = title.substring(0, 40) + "...";
     CourseName.append(title);
@@ -158,6 +209,7 @@ function showFieldRegardsToWindowWitdh() {
     // refactoring data shown in fields only on state change
     if(lst_state != state){
         showField(field_index, text_in_search_bar);
+        build_categories();
         lst_state = state;
     }
 }
@@ -188,6 +240,7 @@ function loadAllData(i = 0){
 loadAllData();
 
 
+
 // add events for tabs
 for(let i = 0; i < tabsIds.length; ++i){
     document.getElementById(tabsIds[i]).addEventListener("click", () => {
@@ -215,3 +268,4 @@ window.addEventListener('resize', showFieldRegardsToWindowWitdh);
 document.getElementById('search-form').addEventListener('submit', function handleForm(event) {
     event.preventDefault();
 });
+
