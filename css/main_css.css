@@ -51,6 +51,12 @@
     font-weight: 900;
 }
 
+.price {
+    margin: 5px;
+    font-size: 18px;
+    display: block;
+}
+
 /* pc view */
 @media only screen and (min-width: 780px) {
     .phone-view {

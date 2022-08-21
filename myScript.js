@@ -61,70 +61,66 @@ function build_categories() {
 build_categories();
 
 // build star rating design
+function suitableStar(rating, i_th){
+    let star = '<i class="fa fa-star" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
+    let star_half_empty = '<i class="fa fa-star-half-empty" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
+    let star_o = '<i class="fa fa-star-o" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
+    let newIcon = document.createElement("span");
+    newIcon.innerHTML = rating >= i_th+.8 ? star : rating >= i_th+.3 ? star_half_empty : star_o;
+    return newIcon;
+}
 function buildStars(rating) {
     stars = [];
-    let rem = 5;
-    while(parseFloat(rating, 10) >= .7){
-        let newIcon = document.createElement("span");
-        newIcon.innerHTML = '<i class="fa fa-star" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
-        stars.push(newIcon);
-        rating -= 1;
-        --rem;
-    }
-    if(parseFloat(rating, 10) >= 0.3){
-        let newIcon = document.createElement("span");
-        newIcon.innerHTML = '<i class="fa fa-star-half-empty" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
-        stars.push(newIcon);
-        --rem;
-    }
-    while(rem > 0){
-        let newIcon = document.createElement("span");
-        newIcon.innerHTML = '<i class="fa fa-star-o" style="font-size:12px; margin: 1px; color:#ebb252"></i>';
-        stars.push(newIcon);
-        --rem;
-    }
+    stars.push(suitableStar(rating, 0));
+    stars.push(suitableStar(rating, 1));
+    stars.push(suitableStar(rating, 2));
+    stars.push(suitableStar(rating, 3));
+    stars.push(suitableStar(rating, 4));
     return stars;
 }
 
-function buildCart(i, item) {
+function createImage(src, alt, h, w){
     let newImg = document.createElement("img");
-    newImg.src = item["image"];
-    newImg.alt = fields[i];
-    newImg.height = "150";
-    newImg.width = "260";
-
-    let CourseName = document.createElement("h3");
-    CourseName.classList.add('title-cart');
-    let title = item["title"];
+    newImg.src = src;
+    newImg.alt = alt;
+    newImg.height = h;
+    newImg.width = w;
+    return newImg;
+}
+function createH3(title, className){
+    let newH3 = document.createElement("h3");
+    newH3.classList.add(className);
     if(title.length > 41) title = title.substring(0, 40) + "...";
-    CourseName.append(title);
-
-    let instructorName = document.createElement("p");
-    instructorName.classList.add("coures-grid-item-description");
-    instructorName.style.cssText = "color: #876f89;";
-    let authors = "";
-    for(str of item["instructors"]) authors += str["name"] + ", ";
-    authors = authors.substring(0, authors.length-2);
-    if(authors.length > 40){
-        authors = authors.substring(0, 39);
-        authors += "...";
+    newH3.append(title);
+    return newH3;
+}
+function createP(text, className, color){
+    let newP = document.createElement("p");
+    newP.classList.add(className);
+    newP.style.color = color;
+    if(text.length > 40){
+        text = text.substring(0, 39);
+        text += "...";
     }
-    instructorName.append(authors);
-
-    let rating = document.createElement("p");
-    rating.style.cssText = "display: inline; margin: 5px; font-size: 12px; color: #ce810e;";
-    rating.append(item["rating"] + " ");
-
+    newP.append(text);
+    return newP;
+}
+function createInlineP(text, color){
+    let newP = document.createElement("p");
+    newP.style.cssText = "display: inline; margin: 5px; font-size: 12px;";
+    newP.style.color = color;
+    newP.append(text);
+    return newP;
+}
+function buildCart(i, item) {
+    let newImg = createImage(item["image"], fields[i], "150", "260");
+    let CourseName = createH3(item["title"], 'title-cart');
+    let instructorName = createP(item["author"], "coures-grid-item-description", "#876f89");
+    let rating = createInlineP(item["rating"] + " ", "#ce810e");
     let stars = buildStars(parseFloat(item["rating"]));
-
     // adding random number of people
-    let retedby = document.createElement("p");
-    retedby.style.cssText = "display: inline; margin: 5px; font-size: 12px; color: #738abb;";
-    retedby.append(" (" + (Math.floor(Math.random()*10)+1) + "," + (Math.floor(Math.random()*900)+100) + ")");
-
-    let price = document.createElement("h3");
-    price.style.cssText = "margin: 5px; font-size: 18px; display: block;";
-    price.append("E€ " + item["price"]);
+    let retedBy = createInlineP(" (" + (Math.floor(Math.random()*10)+1) + "," + (Math.floor(Math.random()*900)+100) + ")", "#738abb")
+    let price = createH3("E€ " + item["price"], "price");
 
     let newHeader = document.createElement("header");
     newHeader.style.cssText = "padding-left: 12px;";
@@ -132,7 +128,7 @@ function buildCart(i, item) {
     newHeader.appendChild(instructorName);
     newHeader.appendChild(rating);
     for(star of stars) newHeader.appendChild(star);
-    newHeader.appendChild(retedby);
+    newHeader.appendChild(retedBy);
     newHeader.appendChild(price);
 
     let newCart = document.createElement("article");
@@ -216,6 +212,7 @@ function showFieldRegardsToWindowWitdh() {
 
 // load specialization data
 async function loadData(branch) {
+    // using json server
     let response = await fetch("http://localhost:3000/" + branch);
     let json = await response.json();
     return json;
